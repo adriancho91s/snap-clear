@@ -6,7 +6,7 @@ import i18nConfig from '@/i18nConfig';
 export default async function initTranslations(
   locale: string,
   namespaces: string[],
-  i18nInstance?: i18n,
+  i18nInstance?: i18n | any,
   resources?: Resource
 ) {
   i18nInstance = i18nInstance || createInstance();

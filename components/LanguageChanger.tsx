@@ -4,7 +4,8 @@ import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import i18nConfig from '@/i18nConfig';
-import { ChangeEvent } from 'react';
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react';
+import { LanguageIcon } from '@/utils/themeIcons/language';
 
 export default function LanguageChanger() {
   const { i18n } = useTranslation();
@@ -12,8 +13,8 @@ export default function LanguageChanger() {
   const router = useRouter();
   const currentPathname = usePathname();
 
-  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const newLocale = e.target.value;
+  const handleChange = (newLocale: string) => {
+    // const newLocale = e.target.value;
 
     // set cookie for next-i18n-router
     const days = 30;
@@ -38,9 +39,25 @@ export default function LanguageChanger() {
   };
 
   return (
-    <select onChange={handleChange} value={currentLocale}>
-      <option value="en">English</option>
-      <option value="es">Español</option>
-    </select>
+    <Dropdown backdrop="blur">
+      <DropdownTrigger>
+        <Button isIconOnly variant="light" onClick={(event) => console.log(event)}>
+        <LanguageIcon />
+        </Button>
+      </DropdownTrigger>
+      <DropdownMenu
+        aria-label="Dropdown Variants"
+        color="primary"
+        onAction={(key) => handleChange(key as string)}
+        key={currentLocale}
+      >
+        <DropdownItem key="en" >
+          English
+        </DropdownItem>
+        <DropdownItem key="es" >
+          Español
+        </DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
   );
 }

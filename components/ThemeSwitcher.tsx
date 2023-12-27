@@ -24,11 +24,11 @@ export function ThemeSwitcher() {
   return (
     <>
     {theme === "dark" ? (
-      <Button isIconOnly variant="bordered" onClick={handleOnClick}>
+      <Button isIconOnly variant="light" onClick={handleOnClick}>
         <LightIcon />
       </Button>
     ) : ( 
-      <Button isIconOnly variant="bordered" onClick={handleOnClick}>
+      <Button isIconOnly variant="light" onClick={handleOnClick}>
         <DarkIcon />
       </Button>
     )

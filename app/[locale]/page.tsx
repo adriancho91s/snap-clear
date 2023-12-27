@@ -1,6 +1,5 @@
 import ExampleClientComponent from '@/components/ExampleClientComponent';
 import styles from './page.module.css';
-import LanguageChanger from '@/components/LanguageChanger';
 import Link from 'next/link';
 import initTranslations from '../i18n';
 import TranslationsProvider from '@/components/TranslationsProvider';
@@ -22,7 +21,6 @@ async function Home({ params: { locale } }: { params: { locale: string } }) {
         </h1>
         <ExampleClientComponent />
         <Link href="/about">{t('page2')}</Link>
-        <LanguageChanger />
       </main>
     </TranslationsProvider>
   );

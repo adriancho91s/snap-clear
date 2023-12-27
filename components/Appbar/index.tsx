@@ -2,6 +2,7 @@
 import React from "react";
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, NavbarMenuToggle, NavbarMenu, NavbarMenuItem} from "@nextui-org/react";
 import { ThemeSwitcher } from '@/components/ThemeSwitcher';
+import LanguageChanger from '@/components/LanguageChanger';
 
 // import {AcmeLogo} from "./AcmeLogo.jsx";
 
@@ -48,9 +49,10 @@ export default function App() {
         <NavbarItem className="hidden lg:flex">
           <Link href="#">Login</Link>
         </NavbarItem>
-        <NavbarItem
-        
-        >
+        <NavbarItem >
+            <LanguageChanger />
+        </NavbarItem>
+        <NavbarItem>
             <ThemeSwitcher />
         </NavbarItem>
         <NavbarItem>
@@ -64,7 +66,7 @@ export default function App() {
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link
               color={
-                index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
+                index === 0 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
               }
               className="w-full"
               href="#"
