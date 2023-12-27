@@ -24,9 +24,6 @@ jobs:
       - name: Set up Yarn
         run: npm install -g yarn
 
-      - name: Set Yarn stable version
-        run: yarn set version 4.0.2
-
       - name: Yarn install, build, and test
         run: |
           yarn install
