@@ -12,7 +12,7 @@ export default function App() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-  const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 900;
 
   const { t: tAppBar } = useTranslation();
 
