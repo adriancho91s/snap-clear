@@ -4382,6 +4382,7 @@ __metadata:
     framer-motion: "npm:^10.16.16"
     i18next: "npm:^23.5.1"
     i18next-resources-to-backend: "npm:^1.1.4"
+    mobile-detect: "npm:^1.4.5"
     next: "npm:^14.0.4"
     next-i18n-router: "npm:^5.0.1"
     next-themes: "npm:^0.2.1"
@@ -5164,6 +5165,13 @@ __metadata:
   bin:
     mkdirp: bin/cmd.js
   checksum: 46ea0f3ffa8bc6a5bc0c7081ffc3907777f0ed6516888d40a518c5111f8366d97d2678911ad1a6882bf592fa9de6c784fea32e1687bb94e1f4944170af48a5cf
+  languageName: node
+  linkType: hard
+
+"mobile-detect@npm:^1.4.5":
+  version: 1.4.5
+  resolution: "mobile-detect@npm:1.4.5"
+  checksum: 7a704dc0e80911f8be09c62c9504f236f472ec668b9b010328335bb100660f603dc7b59a788a15b0c0d45b1f14432c6ffb862e02d775c685f8ac535450e0cd9c
   languageName: node
   linkType: hard
 

@@ -1,34 +1,49 @@
-'use client'
-import React from "react";
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, NavbarMenuToggle, NavbarMenu, NavbarMenuItem} from "@nextui-org/react";
-import { ThemeSwitcher } from '@/components/ThemeSwitcher';
-import LanguageChanger from '@/components/LanguageChanger';
-import { useTranslation } from "react-i18next";
+"use client";
 
-import { usePathname } from "next/navigation";
+import dynamic from 'next/dynamic';
+import { useTheme } from 'next-themes';
+
+const DarkIcon = dynamic(() => import('@/utils/themeIcons/dark'));
+const LightIcon = dynamic(() => import('@/utils/themeIcons/light'));
+
+import React from 'react';
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  Link,
+  Button,
+  NavbarMenuToggle,
+  NavbarMenu,
+  NavbarMenuItem
+} from '@nextui-org/react';
+
+import LanguageChanger from '@/components/LanguageChanger';
+import { useTranslation } from 'react-i18next';
+
+import { usePathname } from 'next/navigation';
 
 export default function App() {
-
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const { theme, setTheme } = useTheme();
 
-  const isMobile = window.innerWidth < 1090;
+  const handleOnClick = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
 
   const { t: tAppBar } = useTranslation();
 
-  const menuItems = [
-    "removeBackground",
-    "blog",
-    "about"
-  ];
+  const menuItems = ['removeBackground', 'blog', 'about'];
 
-  const activeHome = pathname === "/" || pathname === "/es";
+  const activeHome = pathname === '/' || pathname === '/es';
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} isBordered >
-      <NavbarContent className="sm:hidden">
+    <Navbar maxWidth="full" onMenuOpenChange={setIsMenuOpen}  isBordered>
+      <NavbarContent>
         <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           className="sm:hidden"
         />
         <NavbarBrand>
@@ -36,48 +51,58 @@ export default function App() {
           <p className="font-bold text-inherit">Snap Clear</p>
         </NavbarBrand>
       </NavbarContent>
-
-      <NavbarContent className={`${isMobile ? "hidden" : "" }sm:flex gap-4`} justify="center">
-        <NavbarItem aria-current="page">
-          <Link color={activeHome ? "primary" : "foreground"}  href="/">
-            {tAppBar("removeBackground")}
-          </Link>
-        </NavbarItem>
-        <NavbarItem >
-          <Link href="#" color={pathname.includes("blog") ? "primary" : "foreground"} aria-current="page" >
-            {tAppBar("blog")}
-          </Link>
-        </NavbarItem>
-        <NavbarItem >
-          <Link color={pathname.includes("about") ? "primary" : "foreground"} href="about">
-            {tAppBar("about")}
-          </Link>
-        </NavbarItem>
-      </NavbarContent>
-      <NavbarContent justify="end">
-        <NavbarItem >
-            <LanguageChanger />
+        <NavbarContent className="hidden sm:flex gap-4" justify="center">
+          <NavbarItem >
+            <Link color={activeHome ? 'primary' : 'foreground'} href="/">
+              {tAppBar('removeBackground')}
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link
+              href="#"
+              color={pathname?.includes('blog') ? 'primary' : 'foreground'}
+              >
+              {tAppBar('blog')}
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link
+              color={pathname?.includes('about') ? 'primary' : 'foreground'}
+              href="about">
+              {tAppBar('about')}
+            </Link>
+          </NavbarItem>
+        </NavbarContent>
+      <NavbarContent justify="end" >
+        <NavbarItem>
+          <LanguageChanger />
         </NavbarItem>
         <NavbarItem>
-            <ThemeSwitcher />
+            <Button isIconOnly variant="light" onClick={handleOnClick}>
+              {theme === "dark" && (<LightIcon />)} 
+              {theme === "light" && (<DarkIcon />)}
+            </Button>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color={"primary"} href="#" variant="flat">
-            {tAppBar("share")}
+          <Button as={Link} color={'primary'} href="#" variant="flat">
+            {tAppBar('share')}
           </Button>
         </NavbarItem>
       </NavbarContent>
-      <NavbarMenu className={isMobile ? "" : "hidden"}>
+      <NavbarMenu >
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link
               color={
-                index === 0 && activeHome ? "primary" : pathname.includes(item) ? "primary" : "foreground"
+                index === 0 && activeHome
+                  ? 'primary'
+                  : pathname?.includes(item)
+                  ? 'primary'
+                  : 'foreground'
               }
               className="w-full"
-              href="#"
-              size="lg"
-            >
+              href={item === 'removeBackground' ? '/' : `/${item}`}
+              size="lg">
               {tAppBar(item)}
             </Link>
           </NavbarMenuItem>
@@ -86,3 +111,4 @@ export default function App() {
     </Navbar>
   );
 }
+
