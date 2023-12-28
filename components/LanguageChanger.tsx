@@ -41,7 +41,7 @@ export default function LanguageChanger() {
   return (
     <Dropdown backdrop="blur">
       <DropdownTrigger>
-        <Button isIconOnly variant="light" onClick={(event) => console.log(event)}>
+        <Button isIconOnly variant="light">
         <LanguageIcon />
         </Button>
       </DropdownTrigger>

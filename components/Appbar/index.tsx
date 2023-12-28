@@ -1,19 +1,28 @@
-"use client";
+'use client'
 import React from "react";
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, NavbarMenuToggle, NavbarMenu, NavbarMenuItem} from "@nextui-org/react";
 import { ThemeSwitcher } from '@/components/ThemeSwitcher';
 import LanguageChanger from '@/components/LanguageChanger';
+import { useTranslation } from "react-i18next";
 
-// import {AcmeLogo} from "./AcmeLogo.jsx";
+import { usePathname } from "next/navigation";
 
 export default function App() {
+
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
+
+  const { t: tAppBar } = useTranslation();
+
   const menuItems = [
-    "Clear background",
-    "Blog",
-    "About"
+    "removeBackground",
+    "blog",
+    "about"
   ];
+
+  const activeHome = pathname === "/" || pathname === "/es";
 
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen} isBordered >
@@ -28,27 +37,24 @@ export default function App() {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Clear background
+      <NavbarContent className={`${isMobile ? "hidden" : "" }sm:flex gap-4`} justify="center">
+        <NavbarItem aria-current="page">
+          <Link color={activeHome ? "primary" : "foreground"}  href="/">
+            {tAppBar("removeBackground")}
           </Link>
         </NavbarItem>
-        <NavbarItem isActive>
-          <Link href="#" aria-current="page">
-            Blog
+        <NavbarItem >
+          <Link href="#" color={pathname.includes("blog") ? "primary" : "foreground"} aria-current="page" >
+            {tAppBar("blog")}
           </Link>
         </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            About
+        <NavbarItem >
+          <Link color={pathname.includes("about") ? "primary" : "foreground"} href="about">
+            {tAppBar("about")}
           </Link>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
-        </NavbarItem>
         <NavbarItem >
             <LanguageChanger />
         </NavbarItem>
@@ -56,23 +62,23 @@ export default function App() {
             <ThemeSwitcher />
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
-            Share
+          <Button as={Link} color={"primary"} href="#" variant="flat">
+            {tAppBar("share")}
           </Button>
         </NavbarItem>
       </NavbarContent>
-      <NavbarMenu>
+      <NavbarMenu className={isMobile ? "" : "hidden"}>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link
               color={
-                index === 0 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
+                index === 0 && activeHome ? "primary" : pathname.includes(item) ? "primary" : "foreground"
               }
               className="w-full"
               href="#"
               size="lg"
             >
-              {item}
+              {tAppBar(item)}
             </Link>
           </NavbarMenuItem>
         ))}

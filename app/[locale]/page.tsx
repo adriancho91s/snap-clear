@@ -4,16 +4,16 @@ import Link from 'next/link';
 import initTranslations from '../i18n';
 import TranslationsProvider from '@/components/TranslationsProvider';
 
-const i18nNamespaces = ['home'];
+const i18nNamespaces = ['home', "appBar"];
 
 async function Home({ params: { locale } }: { params: { locale: string } }) {
   const { t, resources } = await initTranslations(locale, i18nNamespaces);
 
   return (
-    <TranslationsProvider
-      namespaces={i18nNamespaces}
-      locale={locale}
-      resources={resources}>
+    // <TranslationsProvider
+    //   namespaces={i18nNamespaces}
+    //   locale={locale}
+    //   resources={resources}>
       <main className={styles.main}>
         <h1>{t('header')}</h1>
         <h1 className="text-3xl font-bold underline text-sky-400">
@@ -22,7 +22,7 @@ async function Home({ params: { locale } }: { params: { locale: string } }) {
         <ExampleClientComponent />
         <Link href="/about">{t('page2')}</Link>
       </main>
-    </TranslationsProvider>
+    // </TranslationsProvider>
   );
 }
 
