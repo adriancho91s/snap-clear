@@ -42,7 +42,7 @@ export default async function RootLayout({
             locale={locale}
             resources={resources}
             >
-            <Appbar initialTheme={ ""} />
+            <Appbar />
             {children}
           </TranslationsProvider>
         </Providers>
