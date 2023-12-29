@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 };
 
 export function generateStaticParams() {
-  return i18nConfig.locales.map(locale => ({ locale }));
+    return i18nConfig.locales.map(locale => ({ locale }));
 }
 
 export default async function RootLayout({
@@ -29,8 +29,9 @@ export default async function RootLayout({
   children: ReactNode;
   params: { locale: string };
 }) {
-  
+
   const { resources } = await initTranslations(locale, i18nNamespaces);
+
 
   return (
     <html lang={locale} dir={dir(locale)}>
@@ -41,7 +42,7 @@ export default async function RootLayout({
             locale={locale}
             resources={resources}
             >
-            <Appbar />
+            <Appbar initialTheme={ ""} />
             {children}
           </TranslationsProvider>
         </Providers>
