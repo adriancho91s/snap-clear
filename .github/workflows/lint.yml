@@ -1,0 +1,24 @@
+name: Lint & build - snapclear
+
+on:
+  [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+
+      - name: Set up Yarn
+        run: npm install -g yarn
+
+      - name: Yarn install, build, and test
+        run: |
+          yarn install
+          yarn build
+          # yarn test
