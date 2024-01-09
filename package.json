@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky install" ,
+    "prepare": "husky install",
     "postinstall": "husky install"
   },
   "dependencies": {
@@ -21,6 +21,7 @@
     "next-themes": "^0.2.1",
     "react": "^18",
     "react-dom": "^18",
+    "react-drag-drop-files": "^2.3.10",
     "react-i18next": "^13.2.2"
   },
   "devDependencies": {
