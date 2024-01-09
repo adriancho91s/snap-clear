@@ -1,27 +1,12 @@
-import ExampleClientComponent from '@/components/ExampleClientComponent';
-import styles from './page.module.css';
-import Link from 'next/link';
-import initTranslations from '../i18n';
+import DragAndDrop from '@/components/DragAndDrop';
 
-const i18nNamespaces = ['home', "appBar"];
-
-async function Home({ params: { locale } }: { params: { locale: string } }) {
-  const { t } = await initTranslations(locale, i18nNamespaces);
+async function Home() {
 
   return (
-    // <TranslationsProvider
-    //   namespaces={i18nNamespaces}
-    //   locale={locale}
-    //   resources={resources}>
-      <main className={styles.main}>
-        <h1>{t('header')}</h1>
-        <h1 className="text-3xl font-bold underline text-sky-400">
-        Hello world!
-        </h1>
-        <ExampleClientComponent />
-        <Link href="/about">{t('page2')}</Link>
+    // make that main fill the whole page
+      <main className="flex items-center justify-center h-screen">
+        <DragAndDrop />
       </main>
-    // </TranslationsProvider>
   );
 }
 

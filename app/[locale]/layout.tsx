@@ -8,6 +8,8 @@ import { Providers } from '../providers';
 import Appbar from '@/components/Appbar';
 import TranslationsProvider from '@/components/TranslationsProvider';
 import initTranslations from '../i18n';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const i18nNamespaces = [ "appBar"];
 
@@ -43,6 +45,18 @@ export default async function RootLayout({
             resources={resources}
             >
             <Appbar />
+            <ToastContainer 
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+            />
             {children}
           </TranslationsProvider>
         </Providers>
